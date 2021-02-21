@@ -1,26 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+  Link,
+} from "react-router-dom";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import "./assets/styles/App.css";
+
+import List from "./components/List";
+import Detail from "./components/Detail";
+import React from "react";
+import {
+  AppBar,
+  Toolbar,
+  IconButton,
+  Typography,
+  Button,
+} from "@material-ui/core";
+
+const App = () => (
+  <>
+    <Router>
+      <AppBar position="static">
+        <Toolbar>
+          <Link to="/" style={{color:'white', textDecoration:'none'}}>
+            <Typography variant="h6" >Pokemon List</Typography>
+          </Link>
+        </Toolbar>
+      </AppBar>
+      <Switch>
+        <Route exact path="/poke" component={List} />
+        <Route exact path="/details/:name" component={Detail} />
+        <Redirect from="/" to="/poke" />
+      </Switch>
+    </Router>
+  </>
+);
 
 export default App;
